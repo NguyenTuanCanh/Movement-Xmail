@@ -8,7 +8,7 @@ import Blockies from "react-blockies";
 import { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
 import {
-  isXxxigmNetWork,
+  isMovementNetWork,
   BulkAction,
   fetchReplySender,
 } from "../utils/contract";
@@ -273,6 +273,11 @@ export default function Home(props) {
   const [replyLoading, setReplyLoading] = useState(false);
   const [dataReply, setDataReply] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true)
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 1000);
+
   const tabContent = {
     primary: onFocus ? filteredResults : props.inbox,
     promotions: onFocus ? filteredResults : [],
@@ -354,7 +359,7 @@ export default function Home(props) {
 
   useEffect(() => {
     setInterval(async () => {
-      if (!(await isXxxigmNetWork())) {
+      if (!(await isMovementNetWork())) {
         props.setUser("");
       }
     }, 1000);
@@ -362,6 +367,8 @@ export default function Home(props) {
 
   return (
     <div className="Home">
+      {isLoading && <div className="loading"/>}
+
       <Editor
         forward={forward}
         setForward={setForward}

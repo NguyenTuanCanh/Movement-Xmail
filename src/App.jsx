@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import { getAuthorizedAccounts } from "./utils/wallet";
 import { useEffect, useRef } from "react";
 import {
-  isXxxigmNetWork,
+  isMovementNetWork,
   fetchArchiveSender,
   fetchInboxSender,
   fetchReadSender,
@@ -203,7 +203,7 @@ function App() {
 
   useEffect(() => {
     const myInterval = setInterval(async () => {
-      if ((await isXxxigmNetWork()) && user) {
+      if ((await isMovementNetWork()) && user) {
         _refreshInbox();
         _refreshTrash();
         _refreshSent();
@@ -226,7 +226,7 @@ function App() {
 
   useEffect(() => {
     const action = async () => {
-      if (await isXxxigmNetWork()) {
+      if (await isMovementNetWork()) {
         getAuthorizedAccounts(setUser);
       } else {
         setUser("");

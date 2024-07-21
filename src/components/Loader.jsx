@@ -7,7 +7,7 @@ import {
   getAuthorizedAccounts,
   connectAuthorizedAccounts,
 } from "../utils/wallet";
-import { isXxxigmNetWork, addNetWork, checkNetWork } from "../utils/contract";
+import { isMovementNetWork, addNetWork, checkNetWork } from "../utils/contract";
 import toast from "react-hot-toast";
 
 export default function Loader(props) {
@@ -15,7 +15,7 @@ export default function Loader(props) {
 
   useEffect(() => {
     const action = async () => {
-      (await isXxxigmNetWork()) && getAuthorizedAccounts(props.setUser);
+      (await isMovementNetWork()) && getAuthorizedAccounts(props.setUser);
       if (props.user != "") {
         toast("Connected successfully");
       }
@@ -26,7 +26,7 @@ export default function Loader(props) {
 
   useEffect(() => {
     setInterval(async () => {
-      if (!(await isXxxigmNetWork())) {
+      if (!(await isMovementNetWork())) {
         props.setUser("");
       }
     }, 1000);
@@ -65,7 +65,7 @@ export default function Loader(props) {
         transition={{ delay: 1 }}
         onClick={async () => {
           if (props.user.trim().length == 0) {
-            const val = await isXxxigmNetWork();
+            const val = await isMovementNetWork();
             !val && (await checkNetWork());
             connectAuthorizedAccounts(props.setUser);
           } else {

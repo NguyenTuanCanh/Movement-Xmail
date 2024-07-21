@@ -70,7 +70,7 @@ export function getChainID() {
   return 0;
 }
 
-export async function isXxxigmNetWork() {
+export async function isMovementNetWork() {
   if (isEthereum() && window.ethereum.isMetaMask) {
     try {
       const chainId = await getChainID();
